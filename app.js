@@ -19,6 +19,31 @@ function Location({ ipAddress, city, state, zip, timezone, isp, lat, lng }) {
   return this;
 }
 
+const foo = () => this.foo;
+
+//  why use this type of constructor function and not a class? Is this not the older style?
+
+// 	instead of Class Location({ipAddress, city, state, zip, timezone, isp, lat, lng}){
+// 				    constructor {
+//  this.ipAddress = ipAddress;
+//   this.city = city;
+//   this.state = state;
+//   this.zip = zip;
+//   this.timezone = timezone;
+//   this.isp = isp;
+//   this.lat = lat;
+//   this.lng = lng;
+//      }
+//    locationString = function () {
+//      return this.city + ", " + this.state + " " + this.zip;
+//         };
+// 				  }
+// 			}
+
+// why do you have to “return this” at end of constructor function.
+// How should I set up my form? Best practice?
+// set marker when page first opens?
+
 Location.prototype.locationString = function () {
   return this.city + ", " + this.state + " " + this.zip;
 };
@@ -45,7 +70,7 @@ Location.prototype.addMarker = function (map) {
 };
 
 function initMap() {
-  map = L.map("mapid").setView([51.505, -0.09], 13);
+  map = L.map("mapid").setView([32.8242, -96.744], 13);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
@@ -64,15 +89,13 @@ function displayResults() {
   document.querySelector(".results .isp").innerHTML = place.isp;
 }
 
-function search() {
-  var searchType = "ipAddress";
+function search(e) {
+  e.preventDefault();
+
   var search = document.getElementById("search-box").value;
 
-  isNaN(search.charAt(0))
-    ? (searchType = "domain")
-    : (searchType = "ipAddress");
+  var searchType = isNaN(search.charAt(0)) ? "domain" : "ipAddress";
 
-  console.log(search);
   fetch(
     `https://geo.ipify.org/api/v1?apiKey=at_9D8P3lEDDFmO2pRmugRsVKQoMS4Wf&${searchType}=${search}`
   )
@@ -83,6 +106,7 @@ function search() {
       place.addMarker(map);
 
       displayResults();
+      console.log(place);
     });
 }
 

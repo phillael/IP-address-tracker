@@ -39,7 +39,8 @@
       />
       <div class="tracker">
         <header><h1>IP Address Tracker</h1></header>
-        <div class="search">
+
+        <form class="search" onsubmit="search">
           <input
             type="text"
             placeholder="Search for an IP address or domain"
@@ -48,36 +49,29 @@
           <button id="search-btn">
             <img src="images/icon-arrow.svg" alt="search button" class="btn" />
           </button>
-        </div>
+        </form>
+
         <div class="results">
           <div class="result">
             <h3>IP ADDRESS</h3>
-            <p class="ip-address"></p>
+            <p class="ip-address">2605:6000:1522:4d65:9559:f4cf:6289:eae2</p>
           </div>
           <div class="result">
             <h3>LOCATION</h3>
-            <p class="location"></p>
+            <p class="location">Dallas, TX 75206</p>
           </div>
           <div class="result">
             <h3>TIMEZONE</h3>
-            <p class="timezone"></p>
+            <p class="timezone">-05:00</p>
           </div>
           <div class="result">
             <h3>ISP</h3>
-            <p class="isp"></p>
+            <p class="isp">Charter Communications</p>
           </div>
         </div>
       </div>
     </div>
     <div id="mapid"></div>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.4.1/fetch.min.js"
-      integrity="sha512-+iXlQLHKQZYoFQZfyWkUuJB6X7aZA2+FvAB5PyiYzxRKbgmSLp6vzwXjTlqdvKV5OJS09HHN4lIekb5OOCKhQw=="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
     <script defer src="app.js"></script>
   </body>
