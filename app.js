@@ -19,31 +19,6 @@ function Location({ ipAddress, city, state, zip, timezone, isp, lat, lng }) {
   return this;
 }
 
-const foo = () => this.foo;
-
-//  why use this type of constructor function and not a class? Is this not the older style?
-
-// 	instead of Class Location({ipAddress, city, state, zip, timezone, isp, lat, lng}){
-// 				    constructor {
-//  this.ipAddress = ipAddress;
-//   this.city = city;
-//   this.state = state;
-//   this.zip = zip;
-//   this.timezone = timezone;
-//   this.isp = isp;
-//   this.lat = lat;
-//   this.lng = lng;
-//      }
-//    locationString = function () {
-//      return this.city + ", " + this.state + " " + this.zip;
-//         };
-// 				  }
-// 			}
-
-// why do you have to “return this” at end of constructor function.
-// How should I set up my form? Best practice?
-// set marker when page first opens?
-
 Location.prototype.locationString = function () {
   return this.city + ", " + this.state + " " + this.zip;
 };
@@ -70,7 +45,7 @@ Location.prototype.addMarker = function (map) {
 };
 
 function initMap() {
-  map = L.map("mapid").setView([32.8242, -96.744], 13);
+  map = L.map("mapid").setView([37.4223, -122.085], 13);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
@@ -109,10 +84,3 @@ function search(e) {
       console.log(place);
     });
 }
-
-//get input from search box
-//put input into get request
-//where should I store my api key?
-//
-//get returned data
-//put data lat and longitude into map
