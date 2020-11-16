@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 :root {
   --dark-text-color: hsl(0, 0%, 17%);
   --light-text-color: hsl(0, 0%, 59%);
@@ -15,18 +9,13 @@ html {
   padding: 0;
   font-family: "Rubik", sans-serif;
 }
-h1,
-h3,
-p {
-  margin: 0;
-  font-size: 1.5vw;
-}
 
 h1 {
   font-size: 1.3rem;
   font-weight: 400;
   color: white;
 }
+
 h3 {
   font-size: 0.5rem;
   color: var(--light-text-color);
@@ -34,10 +23,11 @@ h3 {
 }
 
 p {
+  margin: 0;
+  font-size: 1rem;
   color: var(--dark-text-color);
   font-weight: 700;
 }
-
 header {
   margin: 25px;
   text-align: center;
@@ -54,6 +44,10 @@ button {
   height: 50px;
   border-radius: 0 10px 10px 0;
 }
+
+/*/////////////////////
+//    top section   //
+////////////////////*/
 
 .top {
   position: relative;
@@ -72,6 +66,7 @@ button {
 }
 
 .tracker {
+  box-sizing: border-box;
   position: absolute;
   width: 70%;
   top: 0;
@@ -82,7 +77,6 @@ button {
 .search {
   display: flex;
   margin: 0 auto;
-  width: 70%;
   max-width: 425px;
   border-radius: 0 10px 10px 0;
 }
@@ -110,78 +104,9 @@ button {
   transition: 500ms;
 }
 
-.results {
-  position: relative;
-  columns: 4;
-  column-rule: 2px solid rgba(214, 207, 207, 0.7);
-  column-gap: 60px;
-  margin-top: 40px;
-  padding: 30px 0 30px 30px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 2px 8px 13px rgb(80, 80, 80);
-  transition: 250ms all ease-in-out;
-}
-
-.results.closed {
-  height: 0px;
-  overflow: hidden;
-  transition: 250ms all ease-in-out;
-  padding: 14px;
-}
-
-.hamburger {
-  position: absolute;
-  top: 0;
-  left: 5px;
-  background-color: white;
-  padding: 0;
-  width: 25px;
-  height: 25px;
-  border-radius: 10px;
-  font-size: 1.5rem;
-}
-
-.result {
-  display: flex;
-  height: 90px;
-  flex-direction: column;
-  width: 200px;
-  padding: 10px;
-}
-
-.results.closed .result {
-  display: none;
-  transition: 250ms all;
-}
-
-.ip-address {
-  overflow-wrap: break-word;
-  overflow: hidden;
-}
-
-.location {
-  overflow: hidden;
-}
-
-@media (min-width: 1200px) {
-  .location {
-    font-size: 1vw;
-  }
-}
-
-@media (min-width: 700px) and (max-width: 1000px) {
-  .location {
-    font-size: 1vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  .result {
-    width: 80px;
-    height: 70px;
-  }
-}
+/*/////////////////////
+// results display  //
+////////////////////*/
 #mapid {
   width: 100%;
   height: 80vh;
@@ -190,8 +115,79 @@ button {
   padding: 0;
 }
 
+.results {
+  position: relative;
+  columns: 4;
+  column-rule: 2px solid rgba(214, 207, 207, 0.7);
+  column-gap: 20px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 2px 8px 13px rgb(80, 80, 80);
+  transition: 750ms all;
+}
+
+.results.closed {
+  height: 0px;
+  overflow: hidden;
+  transition: 750ms;
+  padding: 16px;
+  background-color: rgb(160, 204, 255);
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  background-color: none;
+  height: 0;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+.hamburger:hover {
+  color: gray;
+}
+
+.result {
+  overflow-wrap: break-word;
+  overflow: hidden;
+
+  display: flex;
+  height: 90px;
+  flex-direction: column;
+  width: 160px;
+  padding: 10px 10px 10px 0;
+  transition: 250ms all;
+}
+
+.results.closed .result {
+  display: none;
+  transition: 250ms all;
+}
+
+/*/////////////////////
+//    media queries //
+////////////////////*/
+
+@media (max-width: 1000px) {
+  .result {
+    width: 100px;
+  }
+  .result p {
+    font-size: 0.8rem;
+    /* width: 90px; */
+  }
+}
+
 @media (max-width: 680px) {
   .tracker {
+    left: 15%;
     min-width: 275px;
   }
   .search {
@@ -210,12 +206,17 @@ button {
     padding: 15px;
   }
   .result {
+    text-align: center;
     width: 100%;
   }
-  p {
-    font-size: 0.8rem;
+  .result p {
+    font-size: 1rem;
   }
 }
+
+/*/////////////////////
+//    animations    //
+////////////////////*/
 
 @keyframes hover-colors {
   0% {
