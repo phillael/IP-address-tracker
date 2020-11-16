@@ -55,6 +55,44 @@ function initMap() {
   document.getElementById("search-btn").addEventListener("click", search);
 }
 
+async function search(e) {
+  e.preventDefault();
+
+  var search = document.getElementById("search-box").value;
+  var searchType = isNaN(search.charAt(0)) ? "domain" : "ipAddress";
+
+  const response = await fetch(
+    `https://geo.ipify.org/api/v1?apiKey=at_9D8P3lEDDFmO2pRmugRsVKQoMS4Wf&${searchType}=${search}`
+  );
+  console.log(response);
+
+  if (response.statusText === "Unprocessable Entity") {
+    alert(
+      "Sorry no data found. Try a domain name such as www.netflix.com or an ip address such as 8.8.8.8"
+    );
+  } else {
+    const json = await response.json();
+
+    place = new Location({}).fromJson(json);
+    if (marker) map.removeLayer(marker);
+    place.addMarker(map);
+
+    displayResults();
+    // console.log(place);
+  }
+  // fetch(
+  //   `https://geo.ipify.org/api/v1?apiKey=at_9D8P3lEDDFmO2pRmugRsVKQoMS4Wf&${searchType}=${search}`
+  // )
+  //   .then((response) => response.json())
+  //   .then((json) => {
+  //     place = new Location({}).fromJson(json);
+  //     if (marker) map.removeLayer(marker);
+  //     place.addMarker(map);
+
+  //     displayResults();
+  //   });
+}
+
 function displayResults() {
   document.querySelector(".results .ip-address").innerHTML = place.ipAddress;
   document.querySelector(
@@ -64,23 +102,7 @@ function displayResults() {
   document.querySelector(".results .isp").innerHTML = place.isp;
 }
 
-function search(e) {
-  e.preventDefault();
-
-  var search = document.getElementById("search-box").value;
-
-  var searchType = isNaN(search.charAt(0)) ? "domain" : "ipAddress";
-
-  fetch(
-    `https://geo.ipify.org/api/v1?apiKey=at_9D8P3lEDDFmO2pRmugRsVKQoMS4Wf&${searchType}=${search}`
-  )
-    .then((response) => response.json())
-    .then((json) => {
-      place = new Location({}).fromJson(json);
-      if (marker) map.removeLayer(marker);
-      place.addMarker(map);
-
-      displayResults();
-      console.log(place);
-    });
+function toggleResults() {
+  var element = document.getElementById("results");
+  element.classList.toggle("closed");
 }

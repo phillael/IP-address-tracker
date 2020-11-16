@@ -111,6 +111,7 @@ button {
 }
 
 .results {
+  position: relative;
   columns: 4;
   column-rule: 2px solid rgba(214, 207, 207, 0.7);
   column-gap: 60px;
@@ -119,6 +120,26 @@ button {
   background-color: white;
   border-radius: 10px;
   box-shadow: 2px 8px 13px rgb(80, 80, 80);
+  transition: 250ms all ease-in-out;
+}
+
+.results.closed {
+  height: 0px;
+  overflow: hidden;
+  transition: 250ms all ease-in-out;
+  padding: 14px;
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  background-color: white;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 10px;
+  font-size: 1.5rem;
 }
 
 .result {
@@ -126,6 +147,12 @@ button {
   height: 90px;
   flex-direction: column;
   width: 140px;
+  padding: 10px;
+}
+
+.results.closed .result {
+  display: none;
+  transition: 250ms all;
 }
 
 .ip-address {
